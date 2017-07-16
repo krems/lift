@@ -6,14 +6,14 @@ import org.apache.commons.cli.*;
 import java.io.PrintWriter;
 
 public class Main {
-    private static final int MIN_NUMBER_OF_FLOORS = 5;
-    private static final int MAX_NUMBER_OF_FLOORS = 20;
+    static final int MIN_NUMBER_OF_FLOORS = 5;
+    static final int MAX_NUMBER_OF_FLOORS = 20;
 
     public static void main(final String[] args) {
-        parseArgs(args);
+        new Main().parseArgs(args);
     }
 
-    static void parseArgs(final String[] args) {
+    void parseArgs(final String[] args) {
         Options options = new Options();
 
         Option floors = Option.builder("f")
@@ -23,8 +23,8 @@ public class Main {
                 .required().build();
         options.addOption(floors);
 
-        Option height = Option.builder("h")
-                .longOpt("height")
+        Option height = Option.builder("fh")
+                .longOpt("floor-height")
                 .hasArg()
                 .desc("Height of single floor (meters)")
                 .required().build();
@@ -56,8 +56,8 @@ public class Main {
         }
     }
 
-    private static void validateArgsAndRun(final Option floors, final Option height, final Option velocity,
-                                           final Option openedTime, final CommandLine line) {
+    private void validateArgsAndRun(final Option floors, final Option height, final Option velocity,
+                                    final Option openedTime, final CommandLine line) {
         int floorsNum = intValue(line, floors);
         validateFloorsNum(floorsNum);
         double floorHeight = doubleValue(line, height);
@@ -68,7 +68,7 @@ public class Main {
         cmdListener.start();
     }
 
-    private static void validateFloorsNum(final int floorsNum) {
+    private void validateFloorsNum(final int floorsNum) {
         if (floorsNum < MIN_NUMBER_OF_FLOORS || floorsNum > MAX_NUMBER_OF_FLOORS) {
             System.err.println("Invalid number of floors. Should be from " + MIN_NUMBER_OF_FLOORS + " to "
                     + MAX_NUMBER_OF_FLOORS + ", but was: " + floorsNum);
@@ -76,7 +76,7 @@ public class Main {
         }
     }
 
-    private static int intValue(final CommandLine line, final Option floors) {
+    private int intValue(final CommandLine line, final Option floors) {
         String optionValue = line.getOptionValue(floors.getOpt());
         try {
             return Integer.parseInt(optionValue);
@@ -86,7 +86,7 @@ public class Main {
         }
     }
 
-    private static double doubleValue(final CommandLine line, final Option floors) {
+    private double doubleValue(final CommandLine line, final Option floors) {
         String optionValue = line.getOptionValue(floors.getOpt());
         try {
             return Double.parseDouble(optionValue);
@@ -96,14 +96,14 @@ public class Main {
         }
     }
 
-    private static void printUsage(final Options options) {
+    private void printUsage(final Options options) {
         HelpFormatter formatter = new HelpFormatter();
         formatter.printHelp(new PrintWriter(System.err), formatter.getWidth(), "lift", "", options,
                 formatter.getLeftPadding(), formatter.getDescPadding(), null);
     }
 
-    protected static CommandListener buildCommandListener(final int floorsNum, final double floorHeight,
-                                                          final double speed, final int doorsOpenedTime) {
+    protected CommandListener buildCommandListener(final int floorsNum, final double floorHeight,
+                                                   final double speed, final int doorsOpenedTime) {
         return new CommandListener(floorsNum, floorHeight, speed, doorsOpenedTime);
     }
 }

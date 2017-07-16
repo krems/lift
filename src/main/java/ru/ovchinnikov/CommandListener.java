@@ -45,7 +45,7 @@ class CommandListener {
         this.controller = new Controller(floorsNum, oneFloorPassTimeMillis, doorsOpenedTime);
     }
 
-    private long calculateOneFloorPassTimeMillis(final double floorHeight, final double speed) {
+    long calculateOneFloorPassTimeMillis(final double floorHeight, final double speed) {
         double timeSeconds = floorHeight / speed;
         return Math.round(timeSeconds * 1000);
     }
