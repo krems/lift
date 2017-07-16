@@ -30,8 +30,8 @@ class CommandListener {
     private void startListeningUserCommands() {
         Scanner sc = new Scanner(System.in);
         CommandInterpreter interpreter = new CommandInterpreter(controller);
-        while (sc.hasNext()) {
-            if (interpreter.interpret(sc.next())) {
+        while (sc.hasNextLine()) {
+            if (interpreter.interpret(sc.nextLine())) {
                 break;
             }
         }

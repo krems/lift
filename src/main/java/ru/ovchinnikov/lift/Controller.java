@@ -13,11 +13,11 @@ public class Controller {
 
 
     public void callAtFloor(int floor) {
-
+        System.out.println("Called at " + floor);
     }
 
     public void insideSelectedFloor(int floor) {
-
+        System.out.println("Inside pressed " + floor);
     }
 
     public void liftArrivedAtFloor(int floor) {
