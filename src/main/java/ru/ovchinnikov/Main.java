@@ -3,10 +3,15 @@ package ru.ovchinnikov;
 
 import org.apache.commons.cli.*;
 
+import java.io.OptionalDataException;
 import java.io.PrintWriter;
 
 public class Main {
     private static final int REACTOR_CAPACITY = 1;
+    private static final String FOOTER = "In app use commands:\r\n" +
+            "call at $floor -- to signal call lift button was pressed at $floor\r\n" +
+            "select floor $floor -- to signal button for $floor floor was pressed inside cabin\r\n" +
+            "exit -- to exit";
     static final int MIN_NUMBER_OF_FLOORS = 5;
     static final int MAX_NUMBER_OF_FLOORS = 20;
 
@@ -82,7 +87,7 @@ public class Main {
         try {
             return Integer.parseInt(optionValue);
         } catch (NumberFormatException e) {
-            System.err.printf(floors.getOpt() + " should be an integer value, but is " + optionValue);
+            System.err.println(floors.getOpt() + " should be an integer value, but is " + optionValue);
             throw e;
         }
     }
@@ -92,15 +97,14 @@ public class Main {
         try {
             return Double.parseDouble(optionValue);
         } catch (NumberFormatException e) {
-            System.err.printf(floors.getOpt() + " should be a double value, but is " + optionValue);
+            System.err.println(floors.getOpt() + " should be a double value, but is " + optionValue);
             throw e;
         }
     }
 
     private void printUsage(final Options options) {
         HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp(new PrintWriter(System.err), formatter.getWidth(), "lift", "", options,
-                formatter.getLeftPadding(), formatter.getDescPadding(), null);
+        formatter.printHelp("lift", null, options, FOOTER, true);
     }
 
     protected CommandListener buildCommandListener(final int floorsNum, final double floorHeight,

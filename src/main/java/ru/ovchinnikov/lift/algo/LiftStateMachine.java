@@ -29,7 +29,7 @@ public class LiftStateMachine {
         }
     }
 
-    boolean openedAtFloor(int floor) {
+    boolean openedAtFloor(final int floor) {
         return cabinState == CabinState.DOORS_OPENED && floor == currentFloor;
     }
 
