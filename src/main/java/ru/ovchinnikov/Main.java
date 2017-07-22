@@ -6,7 +6,7 @@ import org.apache.commons.cli.*;
 import java.io.PrintWriter;
 
 public class Main {
-    private static final int REACTOR_CAPACITY = 10_000;
+    private static final int REACTOR_CAPACITY = 1;
     static final int MIN_NUMBER_OF_FLOORS = 5;
     static final int MAX_NUMBER_OF_FLOORS = 20;
 

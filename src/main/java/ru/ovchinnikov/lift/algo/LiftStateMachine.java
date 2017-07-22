@@ -44,25 +44,28 @@ public class LiftStateMachine {
         switch (cabinState) {
             case IDLE:
                 targetFloor = floor;
+                targetFloorOverridable = false;
+                sendCabinTo(targetFloor);
                 break;
             case DOORS_OPENED:
                 targetFloor = floor;
+                targetFloorOverridable = false;
                 break;
             case MOVING_UP:
                 if (targetFloorOverridable || floor > currentFloor) {
                     targetFloor = floor;
+                    targetFloorOverridable = false;
                 }
                 break;
             case MOVING_DOWN:
                 if (targetFloorOverridable || floor < currentFloor) {
                     targetFloor = floor;
+                    targetFloorOverridable = false;
                 }
                 break;
             default:
                 throw new IllegalStateException("Unknown enum constant " + cabinState);
         }
-        targetFloorOverridable = false;
-        sendCabinTo(targetFloor);
     }
 
     public void doorsOpened() {
