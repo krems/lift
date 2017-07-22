@@ -77,6 +77,7 @@ public class LiftStateMachineTest {
         stateMachine.calledAtFloor(7);
         stateMachine.arrivedAt(4);
         stateMachine.floorSelected(3);
+        stateMachine.arrivedAt(5);
 
         assertEquals(1, moveDown);
     }
@@ -92,6 +93,7 @@ public class LiftStateMachineTest {
     public void floorSelected_shouldMoveCabinDown_whenCalledFromBelow() throws Exception {
         stateMachine.calledAtFloor(5);
         stateMachine.arrivedAt(5);
+        stateMachine.doorsClosed();
         stateMachine.floorSelected(1);
 
         assertEquals(1, moveDown);

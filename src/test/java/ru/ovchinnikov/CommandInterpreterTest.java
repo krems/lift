@@ -3,6 +3,7 @@ package ru.ovchinnikov;
 import org.junit.Before;
 import org.junit.Test;
 import ru.ovchinnikov.lift.Controller;
+import ru.ovchinnikov.lift.LiftEngine;
 
 import static org.junit.Assert.*;
 
@@ -12,7 +13,7 @@ public class CommandInterpreterTest {
     private int selectedFloor = -1;
 
     private CommandInterpreter interpreter = new CommandInterpreter(
-            new Controller(0, null, null, 1) {
+            new Controller(0, null, new LiftEngine(0 ,0), 1) {
                 @Override
                 public void callAtFloor(int floor) {
                     calledAt = floor;
