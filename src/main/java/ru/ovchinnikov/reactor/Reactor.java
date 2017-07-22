@@ -7,8 +7,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Reactor {
-    private static final Processable POISON = () -> {
-    };
+    private static final Processable POISON = () -> {};
+
     private final ExecutorService executor = Executors.newSingleThreadExecutor(task -> {
         Thread thread = new Thread(task);
         thread.setName("Reactor");
@@ -49,6 +49,7 @@ public class Reactor {
             while (true) {
                 Processable processable = in.take();
                 if (processable == POISON) {
+                    executor.shutdown();
                     return;
                 }
                 processable.process();

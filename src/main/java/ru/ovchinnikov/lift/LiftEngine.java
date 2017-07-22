@@ -7,7 +7,12 @@ import java.util.concurrent.TimeUnit;
 
 // @ThreadSafe
 public class LiftEngine {
-    private final ScheduledExecutorService timer = Executors.newSingleThreadScheduledExecutor();
+    private final ScheduledExecutorService timer = Executors.newSingleThreadScheduledExecutor(task -> {
+        Thread thread = new Thread(task);
+        thread.setName("LiftEngine");
+        thread.setDaemon(true);
+        return thread;
+    });
     private final long oneFloorTime;
     private final int doorsOpenedTime;
     // @ThreadSafe
