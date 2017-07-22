@@ -12,7 +12,7 @@ public class CommandInterpreterTest {
     private int selectedFloor = -1;
 
     private CommandInterpreter interpreter = new CommandInterpreter(
-            new Controller(0, 0, 0) {
+            new Controller(0, null, null, 1) {
                 @Override
                 public void callAtFloor(int floor) {
                     calledAt = floor;

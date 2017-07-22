@@ -13,7 +13,7 @@ public class MainTest {
         @Override
         protected CommandListener buildCommandListener(final int floorsNum, final double floorHeight,
                                                        final double speed, final int doorsOpenedTime) {
-            return new CommandListener(floorsNum, floorHeight, speed, doorsOpenedTime) {
+            return new CommandListener(floorsNum, floorHeight, speed, doorsOpenedTime, 1) {
                 @Override
                 public void start() {
                     success = true;

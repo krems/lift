@@ -6,6 +6,7 @@ import org.apache.commons.cli.*;
 import java.io.PrintWriter;
 
 public class Main {
+    private static final int REACTOR_CAPACITY = 10_000;
     static final int MIN_NUMBER_OF_FLOORS = 5;
     static final int MAX_NUMBER_OF_FLOORS = 20;
 
@@ -104,6 +105,6 @@ public class Main {
 
     protected CommandListener buildCommandListener(final int floorsNum, final double floorHeight,
                                                    final double speed, final int doorsOpenedTime) {
-        return new CommandListener(floorsNum, floorHeight, speed, doorsOpenedTime);
+        return new CommandListener(floorsNum, floorHeight, speed, doorsOpenedTime, REACTOR_CAPACITY);
     }
 }
