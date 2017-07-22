@@ -29,7 +29,7 @@ public class LiftStateMachine {
 
     private void sendCabinTo(final int floor) {
         if (floor == currentFloor) {
-            cabinState = CabinState.DOORS_OPENED; // todo?
+            cabinState = CabinState.DOORS_OPENED;
             controller.openDoors();
         } else if (floor > currentFloor) {
             controller.moveUp();
