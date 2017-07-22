@@ -20,11 +20,17 @@ public class LiftStateMachine {
     }
 
     public void calledAtFloor(final int floor) {
-        buttonsState.setButton(floor);
+        if (!openedAtFloor(floor)) {
+            buttonsState.setButton(floor);
+        }
         if (cabinState == CabinState.IDLE) {
             targetFloor = floor;
             sendCabinTo(floor);
         }
+    }
+
+    boolean openedAtFloor(int floor) {
+        return cabinState == CabinState.DOORS_OPENED && floor == currentFloor;
     }
 
     private void sendCabinTo(final int floor) {
@@ -70,7 +76,9 @@ public class LiftStateMachine {
 
     public void doorsOpened() {
         buttonsState.clearButton(currentFloor);
-        targetFloorOverridable = true;
+        if (currentFloor == targetFloor) {
+            targetFloorOverridable = true;
+        }
         controller.closeDoors();
     }
 
